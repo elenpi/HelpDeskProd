@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
-from gmail import GMail, Message
+# from gmail import GMail, Message
 
 
 # Create your models here.
