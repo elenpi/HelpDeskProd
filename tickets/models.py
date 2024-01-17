@@ -53,18 +53,18 @@ class Ticket(models.Model):
             self.time_in_development = timezone.now()
         elif self.status == Status.CLOSED.value and self.time_closed is None:
             self.time_closed = timezone.now()
-            self.send_closed_ticket_email()
+            # self.send_closed_ticket_email()
 
         super(Ticket, self).save(*args, **kwargs)
 
-    def send_closed_ticket_email(self):
-        gmail = GMail(settings.EMAIL_ADDRESS, settings.EMAIL_PASSWORD)  # Use your actual username and password
-        msg = Message(
-            'Your ticket has been closed',
-            to=self.reporter.email,
-            text=f"Your ticket '{self.title}' has been closed. Thank you for using our ticketing system!"
-        )
-        gmail.send(msg)
+    # def send_closed_ticket_email(self):
+    #     gmail = GMail(settings.EMAIL_ADDRESS, settings.EMAIL_PASSWORD)  # Use your actual username and password
+    #     msg = Message(
+    #         'Your ticket has been closed',
+    #         to=self.reporter.email,
+    #         text=f"Your ticket '{self.title}' has been closed. Thank you for using our ticketing system!"
+    #     )
+    #     gmail.send(msg)
 
     # def send_closed_ticket_email(self):
     #     subject = 'Your ticket has been closed'
