@@ -5,7 +5,7 @@ build:
     build:
       - pip3 install -r requirements.txt
 run:
-  runtime-version: 3.11
+  runtime-version: 3.11.15
   pre-run:  
     - pip3 install pipenv
     - pipenv install
