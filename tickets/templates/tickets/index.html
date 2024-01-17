@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}HelpDesk{% endblock %}
+
+{% block content %}
+
+    <div class="container pb-1">
+
+        <div class="row pt-4">
+            <div class="col">
+                <div class="overflow-hidden mb-3">
+                    <h2 class="font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="maskUp">
+                        Welcome!
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="overflow-hidden">
+                    <p class="lead mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="200">
+                        Welcome to <span
+                            class="alternative-font">HelpDesk.</span>- your solution for fast and efficient customer service. <br> 
+                            Our easy-to-use platform ensures quick resolution of your technical queries and support needs. <br>
+                            Submit ticket and track progress, all in one place. <br>
+                            Experience hassle-free support with HepDesk!
+                        </p>
+                </div>
+            </div>
+            <div class="col-lg-2 appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="500">
+                <a href="{% url 'ticket-creation-page' %}" class="btn btn-modern btn-dark mt-1">Create ticket</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col py-3">
+                <hr class="solid mt-5 mb-2">
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+
+        <div class="row">
+            <div class="col">
+                <div class="overflow-hidden mb-3">
+                    <h2 class="font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="textEntrance" data-appear-animation-delay="700">
+                        Your Open Tickets:
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p class="lead mb-0">
+                    {% if tickets.count == 1 %}
+                        1 ticket found.
+                    {% elif tickets.count > 1 %}
+                        {{ tickets.count }} tickets found.
+                    {% else %}
+                        No tickets found.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-1">
+                <hr class="my-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                <ul class="simple-post-list m-0">
+                    {% for ticket in tickets %}
+                        <li>
+                            {% comment %}<a href="{% url 'ticket-detail-page' pk=ticket.pk %}">
+                                {{ ticket.title }} (Status: {{ ticket.status }})
+                            </a>{% endcomment %}
+                            <div class="post-info">
+                                <a href="{% url 'ticket-detail-page' pk=ticket.pk %}">{{ ticket.title }}</a>
+                                <div class="post-meta">
+                                    <span class="text-dark font-weight-semibold">{{ ticket.category }}</span> | ({{ ticket.status }})
+                                </div>
+                            </div>
+                        </li>
+                    {% empty %}
+                        <p>There are no open tickets!</p>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

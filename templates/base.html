@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="keywords" content="HelpDesk"/>
+    <meta name="description" content="HelpDesk - Ticket System">
+    <meta name="author" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="{% static "img/apple-touch-icon.png" %}">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+    <!-- Web Fonts  -->
+    <link id="googleFonts"
+          href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light%7CPlayfair+Display:400&display=swap"
+          rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/animate/animate.compat.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/simple-line-icons/css/simple-line-icons.min.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/owl.carousel/assets/owl.carousel.min.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/owl.carousel/assets/owl.theme.default.min.css" %}">
+    <link rel="stylesheet" href="{% static "vendor/magnific-popup/magnific-popup.min.css" %}">
+
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static "css/theme.css" %}">
+    <link rel="stylesheet" href="{% static "css/theme-elements.css" %}">
+
+    <!-- Skin CSS -->
+    <link id="skinCSS" rel="stylesheet" href="{% static "skins/default.css" %}">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static "css/custom.css" %}">
+    {% block css_files %} {% endblock %}
+    {% block top_javascript %}{% endblock %}
+</head>
+<body data-plugin-page-transition>
+<div class="body">
+    <header id="header" class="header-effect-shrink"
+            data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': true, 'stickyStartAt': 120, 'stickyHeaderContainerHeight': 70}">
+        <div class="header-body border-color-primary header-body-bottom-border">
+            <div class="header-container container">
+                <div class="header-row">
+                    <div class="header-column">
+                        <div class="header-row">
+                            <div class="header-logo">
+                                <a href="{% url 'landing-page' %}">
+                                    {#<img alt="Porto" width="100" height="48" src="{% static "img/logo-default-slim.png" %}">#}
+                                    <h2 class="font-weight-semibold text-9 line-height-6 mt-3 mb-2">
+                                        <em class="p-relative z-index-1 fst-normal">HelpDesk
+                                            <span class="appear-animation animated highlightScribble1 appear-animation-visible"
+                                                  data-appear-animation="highlightScribble1" style="animation-delay: 100ms;">
+                                                <svg class="highlight-scribble-1" viewBox="0 0 760 60" preserveAspectRatio="none">
+                                                    <path d="M5.29,45c58.45-36.43,84.27-39.17,96-31.55s5.8,23.19,18,28.92C141.93,53,179,7.19,208.29,17.83c15.37,5.59,11.78,20.65,27,24.54,24.36,6.23,46.68-29,69-21.91,13.54,4.29,11.14,19.09,24,21.91,18.79,4.12,32.62-25.58,56-24.54,17,.76,16.64,21.9,34,24.54,21.69,3.31,34.42-25.43,57-21.91,15.25,2.38,15.08,16.37,30,18.41,22.32,3.05,34.49-26.64,56-23.66,16.75,2.31,17.76,21.47,34,22.78,17.87,1.44,25.48-21.06,45-21.91,9.48-.41,22.55,4.24,39,25.41"
+                                                          stroke="#0088cc" pathLength="1" stroke-width="14" fill="none"></path>
+                                                </svg>
+                                            </span>
+                                        </em>
+                                    </h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-column justify-content-end">
+                        <div class="header-row">
+                            <div class="header-nav header-nav-links order-2 order-lg-1">
+                                <div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                    {% include 'partial/_nav.html' %}
+                                </div>
+                                <button class="btn header-btn-collapse-nav" data-bs-toggle="collapse" data-bs-target=".header-nav-main nav">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+    {% include 'partial/_footer.html' %}
+    {% block javascript %}{% endblock %}
+</div>
+<!-- Vendor -->
+<script src="{% static "vendor/plugins/js/plugins.min.js" %}"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="{% static "js/theme.js" %}"></script>
+
+<!-- Theme Custom -->
+<script src="{% static "js/custom.js" %}"></script>
+
+<!-- Theme Initialization Files -->
+<script src="{% static "js/theme.init.js" %}"></script>
+
+</body>
+</html>

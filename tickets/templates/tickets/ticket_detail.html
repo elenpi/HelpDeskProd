@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Ticket{% endblock %}
+
+{% block content %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    <div class="container pb-1">
+        <div class="row">
+            <div class="col">
+                <div class="overflow-hidden mb-3">
+                    <h2 class="font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="textEntrance" data-appear-animation-delay="700">
+                        {{ ticket.title }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <section id="details">
+                    <div><strong>Reporter:</strong> {{ ticket.reporter }}</div>
+                    <div><strong>Created at:</strong> {{ ticket.time_created }}</div>
+                    <div><strong>Category:</strong> {{ ticket.category }}</div>
+                    <div><strong>Status:</strong> {{ ticket.status }}</div>
+                </section>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <section id="description">
+                    <p>{{ ticket.description }}</p>
+                </section>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'ticket-detail-edit' pk=ticket.id %}" class="btn btn-tertiary mb-2">Edit</a>
+                {% if request.user == ticket.reporter %}
+                     <a href="#" data-id="{{ ticket.pk }}" class="btn btn-secondary mb-2 delete-btn">Delete</a>
+                {% endif %}
+
+                {% if ticket.status == 'closed' and rating_form %}
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ rating_form.rating.id_for_label }}">Rating:</label>
+                            {{ rating_form.rating }}
+                        </div>
+                        <button type="submit">Submit Rating</button>
+                    </form>
+                {% endif %} 
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.delete-btn').click(function (e) {
+                e.preventDefault();
+
+                var result = confirm('Are you sure you want to delete this ticket?');
+
+                if (result) {
+                    var ticketId = $(this).data('id');
+                    $.ajax({
+                        url: '{% url "ticket-delete" pk=0 %}'.replace('0', ticketId),
+                        data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                        type: 'POST',
+                        success: function (response) {
+                            if (response == 'Success') {
+                                window.location.href = '{% url "tickets-page" %}';
+                            } else {
+                                alert('There was an error deleting the ticket. Please try again.');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
