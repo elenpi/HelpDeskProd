@@ -1,5 +1,8 @@
 version: 1.0
 runtime: python311
+  pre-run:  
+    - pip3 install pipenv
+    - pipenv install
 build:
   commands:
     build:
